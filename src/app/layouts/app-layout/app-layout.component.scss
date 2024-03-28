@@ -1,0 +1,5 @@
+:host {
+  .main-container {
+    @apply flex flex-col justify-center items-center max-w-5xl mx-auto w-full min-h-screen;
+  }
+}
