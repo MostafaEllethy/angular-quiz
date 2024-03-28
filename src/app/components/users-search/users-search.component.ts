@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { UsersService } from '@/services';
 import { IUser } from '@/types';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -26,6 +27,7 @@ import { RouterModule } from '@angular/router';
     MatProgressSpinnerModule,
     MatMenuModule,
     RouterModule,
+    MatButtonModule,
   ],
   templateUrl: './users-search.component.html',
   styleUrl: './users-search.component.scss',
@@ -52,6 +54,11 @@ export class UsersSearchComponent implements OnInit, OnDestroy {
   subs = new Subscription();
   searching = false;
   user: IUser | null = null;
+
+  //* Computed Props
+  get query() {
+    return this.form.controls.query.value;
+  }
 
   //* Hooks
   ngOnInit(): void {
@@ -90,5 +97,11 @@ export class UsersSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  //* Handlers
+  clearInput() {
+    this.form.patchValue({ query: '' });
+    this.menuTrigger.closeMenu();
   }
 }

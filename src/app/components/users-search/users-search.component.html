@@ -2,16 +2,30 @@
   <input matInput placeholder="Search..." formControlName="query" />
 
   <!-- Suffix Icon -->
-  <mat-icon matSuffix>
-    <mat-spinner diameter="21" *ngIf="searching; else notSearching" />
-    <ng-template #notSearching> search </ng-template>
+  <mat-icon matSuffix *ngIf="searching || !query">
+    <mat-spinner diameter="21" *ngIf="searching" />
+    <ng-container *ngIf="!query">search</ng-container>
   </mat-icon>
+
+  <button
+    matSuffix
+    *ngIf="query && !searching"
+    class="px-3"
+    (click)="clearInput()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-form-field>
 <!-- Add a trigger for the menu -->
 <div [matMenuTriggerFor]="menu" class="invisible"></div>
 
 <!-- Search results menu -->
-<mat-menu #menu="matMenu" [xPosition]="'after'" [yPosition]="'below'">
+<mat-menu
+  #menu="matMenu"
+  [xPosition]="'after'"
+  [yPosition]="'below'"
+  [hasBackdrop]="false"
+>
   <a [routerLink]="['/user/' + user?.id]">
     <div class="flex gap-x-3 items-center px-4">
       <img
