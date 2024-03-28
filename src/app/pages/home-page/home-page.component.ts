@@ -44,7 +44,7 @@ export class HomePageComponent implements OnInit {
     //* Delay for preview
     this.usersService
       .get(page)
-      .pipe(delay(250))
+      .pipe(delay(150))
       .subscribe({
         next: (res) => {
           this.result = res;

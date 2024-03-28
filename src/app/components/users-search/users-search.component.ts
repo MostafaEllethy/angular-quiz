@@ -75,7 +75,7 @@ export class UsersSearchComponent implements OnInit, OnDestroy {
               this.usersService
                 .find(query)
                 //* Delay for demo to present spinner
-                .pipe(delay(250))
+                .pipe(delay(150))
                 .subscribe({
                   next: (result) => {
                     this.user = result.data;

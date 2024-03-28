@@ -6,8 +6,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UsersService {
+  //* Constructor
   constructor(private readonly http: HttpClient) {}
 
+  //* Handlers
   get(page = 1) {
     return this.http.get<IGetUsersResponse>(
       `https://reqres.in/api/users?page=${page}`
