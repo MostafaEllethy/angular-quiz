@@ -12,7 +12,6 @@ export class RequestCacheService<T> {
   }
 
   get(req: HttpRequest<unknown>): HttpResponse<T> | undefined {
-    console.log(req.urlWithParams, this.map.get(req.urlWithParams));
     return this.map.get(req.urlWithParams);
   }
 }
