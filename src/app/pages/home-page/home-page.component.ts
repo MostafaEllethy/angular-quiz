@@ -3,7 +3,7 @@ import { IGetUsersResponse } from '@/types';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { delay } from 'rxjs';
@@ -23,7 +23,11 @@ import { delay } from 'rxjs';
 })
 export class HomePageComponent implements OnInit {
   //* Constructor
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
+  ) {}
 
   //* Props
   result?: IGetUsersResponse;
@@ -31,12 +35,23 @@ export class HomePageComponent implements OnInit {
 
   //* Hooks
   ngOnInit(): void {
-    this.fetchUsers();
+    //* Check if page number exist in url
+    const page = parseInt(this.route.snapshot.queryParamMap.get('page') ?? '1');
+
+    this.fetchUsers(page);
   }
 
   //* Handlers
-  handlePageEvent(event: PageEvent) {
-    this.fetchUsers(event.pageIndex + 1);
+  handlePageEvent(event: PageEvent | number) {
+    const page = typeof event === 'number' ? event : event.pageIndex + 1;
+
+    this.fetchUsers(page);
+
+    //* Set query params
+    this.router.navigate([], {
+      queryParams: { page },
+      queryParamsHandling: 'merge',
+    });
   }
 
   fetchUsers(page?: number) {
