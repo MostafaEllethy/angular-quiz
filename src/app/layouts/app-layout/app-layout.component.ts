@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SearchInputComponent } from '@/components';
+import { UsersSearchComponent } from '@/components';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [MatToolbarModule, SearchInputComponent],
+  imports: [MatToolbarModule, UsersSearchComponent, RouterModule],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
 })

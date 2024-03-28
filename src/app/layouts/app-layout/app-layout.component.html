@@ -1,12 +1,12 @@
-<main class="main-container">
-  <!-- Toolbar -->
-  <mat-toolbar class="rounded">
-    <div class="flex items-center justify-between w-full">
-      <span class="flex-1">Users</span>
-      <app-search-input />
-    </div>
-  </mat-toolbar>
+<!-- Toolbar -->
+<mat-toolbar class="rounded">
+  <div class="content">
+    <a [routerLink]="['/']">Angular Quiz</a>
+    <app-users-search />
+  </div>
+</mat-toolbar>
 
+<main>
   <!-- Page Content -->
   <ng-content></ng-content>
 </main>

@@ -1,5 +1,9 @@
 :host {
-  .main-container {
-    @apply flex flex-col justify-center items-center max-w-5xl mx-auto w-full min-h-screen;
+  mat-toolbar .content {
+    @apply flex items-center justify-between w-full max-w-4xl mx-auto;
+  }
+
+  main {
+    @apply max-w-4xl mx-auto w-full mt-5;
   }
 }

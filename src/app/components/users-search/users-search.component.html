@@ -1,0 +1,33 @@
+<mat-form-field appearance="outline" [formGroup]="form">
+  <input matInput placeholder="Search..." formControlName="query" />
+
+  <!-- Suffix Icon -->
+  <mat-icon matSuffix>
+    <mat-spinner diameter="21" *ngIf="searching; else notSearching" />
+    <ng-template #notSearching> search </ng-template>
+  </mat-icon>
+
+  <!-- Add a trigger for the menu -->
+
+  <!-- Search results menu -->
+</mat-form-field>
+<div [matMenuTriggerFor]="menu" class="invisible"></div>
+<mat-menu
+  #menu="matMenu"
+  [xPosition]="'after'"
+  [yPosition]="'below'"
+  [hasBackdrop]="false"
+  [autofocus]="false"
+>
+  <a [routerLink]="['/user/' + user?.id]">
+    <div class="flex gap-x-3 items-center px-4">
+      <img
+        [src]="user?.avatar"
+        class="rounded-full w-10 aspect-square object-cover"
+      />
+      <span class="font-medium"
+        >{{ user?.first_name }} {{ user?.last_name }}</span
+      >
+    </div>
+  </a>
+</mat-menu>
