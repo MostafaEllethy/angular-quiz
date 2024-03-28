@@ -1,4 +1,4 @@
-import { User } from '@/types';
+import { IGetUsersResponse, IUser } from '@/types';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -8,13 +8,13 @@ import { Injectable } from '@angular/core';
 export class UsersService {
   constructor(private readonly http: HttpClient) {}
 
-  page = 1;
-
-  get() {
-    return this.http.get<unknown>(`https://reqres.in/api/users?page=${1}`);
+  get(page = 1) {
+    return this.http.get<IGetUsersResponse>(
+      `https://reqres.in/api/users?page=${page}`
+    );
   }
 
   find(id: string) {
-    return this.http.get<{ data: User }>(`https://reqres.in/api/users/${id}`);
+    return this.http.get<{ data: IUser }>(`https://reqres.in/api/users/${id}`);
   }
 }

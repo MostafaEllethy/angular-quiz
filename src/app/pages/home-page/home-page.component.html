@@ -1,0 +1,38 @@
+<mat-progress-bar mode="indeterminate" class="mb-7" *ngIf="fetching" />
+
+<ng-container *ngIf="!fetching">
+  <section class="grid grid-cols-3 gap-7">
+    <mat-card
+      *ngFor="let user of result?.data"
+      [appearance]="'outlined'"
+      [routerLink]="['/user/' + user.id]"
+      class="hover:shadow hover:-translate-x-1 hover:-translate-y-1 transition-transform cursor-pointer"
+    >
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title
+            >{{ user.first_name }} {{ user.last_name }}</mat-card-title
+          >
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+          <img
+            mat-card-sm-image
+            [src]="user.avatar"
+            [alt]="user.first_name + ' image'"
+          />
+        </mat-card-title-group>
+      </mat-card-header>
+    </mat-card>
+  </section>
+
+  <section class="flex justify-center mt-7">
+    <mat-paginator
+      [showFirstLastButtons]="true"
+      [length]="result?.total"
+      [pageSize]="result?.per_page"
+      [pageSizeOptions]="[]"
+      [pageIndex]="(result?.page ?? 1) - 1"
+      aria-label="Select page"
+      (page)="handlePageEvent($event)"
+    />
+  </section>
+</ng-container>

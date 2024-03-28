@@ -10,7 +10,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription, debounceTime, delay, distinctUntilChanged } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '@/services';
-import { User } from '@/types';
+import { IUser } from '@/types';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 
@@ -51,7 +51,7 @@ export class UsersSearchComponent implements OnInit, OnDestroy {
   });
   subs = new Subscription();
   searching = false;
-  user: User | null = null;
+  user: IUser | null = null;
 
   //* Hooks
   ngOnInit(): void {
@@ -90,11 +90,5 @@ export class UsersSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
-  }
-
-  //* Handlers
-
-  onMenuClose() {
-    this.user = null;
   }
 }
