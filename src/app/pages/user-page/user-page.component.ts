@@ -24,6 +24,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserPageComponent implements OnInit {
   //* Props
   fetching = true;
+  error = false;
   user?: IUser;
 
   //* Constructor
@@ -40,6 +41,7 @@ export class UserPageComponent implements OnInit {
         this.user = data;
         this.fetching = false;
       },
+      error: () => (this.error = true),
     });
   }
 }
