@@ -76,12 +76,12 @@ export class UsersSearchComponent implements OnInit, OnDestroy {
                     this.searching = false;
                   },
                   error: () => {
-                    this.closeMenu();
+                    this.menuTrigger.closeMenu();
                     this.searching = false;
                   },
                 });
             } else {
-              this.closeMenu();
+              this.menuTrigger.closeMenu();
             }
           },
         })
@@ -93,8 +93,8 @@ export class UsersSearchComponent implements OnInit, OnDestroy {
   }
 
   //* Handlers
-  closeMenu() {
-    this.menuTrigger.closeMenu();
+
+  onMenuClose() {
     this.user = null;
   }
 }
