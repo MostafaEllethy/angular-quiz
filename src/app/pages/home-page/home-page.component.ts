@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -40,11 +41,15 @@ export class HomePageComponent implements OnInit {
 
   fetchUsers(page?: number) {
     this.fetching = true;
-    this.usersService.get(page).subscribe({
-      next: (res) => {
-        this.result = res;
-        this.fetching = false;
-      },
-    });
+    //* Delay for preview
+    this.usersService
+      .get(page)
+      .pipe(delay(250))
+      .subscribe({
+        next: (res) => {
+          this.result = res;
+          this.fetching = false;
+        },
+      });
   }
 }
